@@ -643,7 +643,7 @@ exec_files_info (t)
 			 vp->tstart, vp->tend, vp->dstart, vp->dend, vp->bstart, vp->bend, vp->name,
 			 *vp->member ? "(" : "", vp->member,
 			 *vp->member ? ")" : "");
-    }
+    
       printf_unfiltered ("\t  %8.8s   %8.8s   %8.8s   %8.8s %8.8s %s\n",
 		       "tstart", "tend", "dstart", "dend", "section",
 		       "file(member)");
@@ -654,7 +654,6 @@ exec_files_info (t)
 			 *vp->member ? "(" : "", vp->member,
 			 *vp->member ? ")" : "");
     }
-#endif
 }
 
 static void

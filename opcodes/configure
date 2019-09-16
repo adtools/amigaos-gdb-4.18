@@ -1802,7 +1802,7 @@ else
   else
     { echo "configure: error: installation or configuration problem: compiler cannot create executables." 1>&2; exit 1; }
   fi
-  rm -f conftest*
+  rm -rf conftest*
   test x"${ac_cv_exeext}" = x && ac_cv_exeext=no
 fi
 fi

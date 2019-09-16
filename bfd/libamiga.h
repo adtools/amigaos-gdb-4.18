@@ -68,6 +68,14 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #define HUNK_ATTR_FAST 0x02 /* fast */
 #define HUNK_ATTR_FOLLOWS 0x03 /* Mem id follows */
 
+#define MEMF_PUBLIC (1L<<0)
+#define MEMF_CHIP   (1L<<1)
+#define MEMF_FAST   (1L<<2)
+
+#define HUNKF_ADVISORY	(1L<<29)
+#define HUNKF_CHIP	(1L<<30)
+#define HUNKF_FAST	(1L<<31)
+
 /* HUNK_EXT sub-types.*/  
 #define EXT_SYMB	0	/* Symbol table.  */
 #define EXT_DEF		1	/* Relocatable definition.  */

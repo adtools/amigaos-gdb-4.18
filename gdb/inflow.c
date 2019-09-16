@@ -693,9 +693,6 @@ gdb_setpgid ()
 
   if (job_control)
     {
-#ifdef __amigaos__
-      retval = setpgrp (getpid (), getpid ());
-#else
 #if defined (NEED_POSIX_SETPGID) || (defined (HAVE_TERMIOS) && defined (HAVE_SETPGID))
       /* setpgid (0, 0) is supposed to work and mean the same thing as
 	 this, but on Ultrix 4.2A it fails with EPERM (and
@@ -710,7 +707,6 @@ gdb_setpgid ()
 #endif /* USG */
 #endif /* TIOCGPGRP.  */
 #endif /* NEED_POSIX_SETPGID */
-#endif /* __amigaos__ */
     }
   return retval;
 }

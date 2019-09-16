@@ -37,10 +37,8 @@ struct vmap {
   CORE_ADDR dstart;	/* virtual address of data start	*/
   CORE_ADDR dend;	/* virtual address of data end		*/
   CORE_ADDR dvma;	/* virtual addr of data section in object file */
-#ifdef __amigaos__
   CORE_ADDR bstart;	/* virtual address of bss start		*/
   CORE_ADDR bend;	/* virtual address of bss end		*/
-#endif
 
   /* This is NULL for the exec-file.  */
   struct objfile *objfile;

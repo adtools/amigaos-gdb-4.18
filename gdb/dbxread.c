@@ -536,9 +536,7 @@ dbx_symfile_read (objfile, section_offsets, mainline)
   bfd *sym_bfd;
   int val;
   struct cleanup *back_to;
-#ifdef __amigaos__
   struct symbol *mainsym;
-#endif
 
   val = strlen (objfile->name);
 
@@ -596,7 +594,6 @@ dbx_symfile_read (objfile, section_offsets, mainline)
 
   install_minimal_symbols (objfile);
 
-#ifdef __amigaos__
   mainsym = lookup_symbol ("main", NULL, VAR_NAMESPACE, NULL, NULL);
 
   if (mainsym
@@ -605,7 +602,6 @@ dbx_symfile_read (objfile, section_offsets, mainline)
       objfile->ei.main_func_lowpc = BLOCK_START (SYMBOL_BLOCK_VALUE (mainsym));
       objfile->ei.main_func_highpc = BLOCK_END (SYMBOL_BLOCK_VALUE (mainsym));
     }
-#endif
 
   do_cleanups (back_to);
 }

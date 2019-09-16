@@ -37,9 +37,6 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #undef MAXINT
 #undef MININT
 
-#include <exec/memory.h>
-#include <dos/doshunks.h>
-#if 0
 /* Hunk ID numbers.*/  
 #define HUNK_UNIT       999
 #define HUNK_NAME	1000
@@ -61,7 +58,6 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #define HUNK_DREL8	1017
 #define HUNK_LIB	1018
 #define HUNK_INDEX	1019
-#endif
 
 /* The hunk ID part.  */
 #define HUNK_VALUE(hunk_id) ((hunk_id) & 0x3fffffff)
@@ -72,7 +68,6 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #define HUNK_ATTR_FAST 0x02 /* fast */
 #define HUNK_ATTR_FOLLOWS 0x03 /* Mem id follows */
 
-#if 0
 /* HUNK_EXT sub-types.*/  
 #define EXT_SYMB	0	/* Symbol table.  */
 #define EXT_DEF		1	/* Relocatable definition.  */
@@ -85,7 +80,6 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #define EXT_DEXT32	133	/* 32 bit data releative reference.  */
 #define EXT_DEXT16	134	/* 16 bit data releative reference.  */
 #define EXT_DEXT8	135	/*  8 bit data releative reference.  */
-#endif
 
 
 typedef struct amiga_reloc {

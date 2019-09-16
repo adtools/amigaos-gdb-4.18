@@ -1,0 +1,12 @@
+# Host: Commodore Amiga running AmigaOS.
+NAT_FILE= nm-amigaos.h
+NATDEPFILES= infptrace.o fork-child.o amigaos-nat.o amigaread.o
+XDEPFILES=
+XM_FILE= xm-amigaos.h
+# Use GNU C compiler
+CC = gcc
+# Use GNU install
+INSTALL = /bin/install -c
+# Don't use the mmalloc library, there is no sbrk() or mmap().
+MMALLOC=
+MMALLOC_DISABLE = -DNO_MMALLOC

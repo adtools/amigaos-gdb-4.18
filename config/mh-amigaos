@@ -1,0 +1,6 @@
+# Host makefile fragment for Commodore Amiga running AmigaOS.
+
+# There is no standard system compiler.  Assume use GNU C.
+CC = gcc
+# There is no support for -g yet.  But use -O instead.
+CFLAGS = -O

@@ -1,0 +1,53 @@
+A few notes concerning the Amiga GDB port:
+
+- Register values are only available after a trap, that is, after a
+  breakpoint, after single stepping or after executing, for example, an
+  invalid 680x0 instruction or a division by zero. There are no register
+  values available after you have just attached to a process or if another
+  process sent a signal to the debugged process.
+
+- You can only debug a process that uses ixemul.library.
+
+- You can attach to another process by giving 'attach' the address of the
+  Task structure of that process in decimal. However, as an AmigaOS
+  extension you can also specify the CLI process number, which is a lot
+  easier to obtain (just run 'status').
+
+- Using 'continue' instead of 'detach' when you want to stop debugging a
+  process that you 'attach'ed to may cause a crash. It is safer to use
+  'detach'.
+
+- Before gdb reads or writes memory, the address is first tested to see if
+  it is a valid address. Also a test is made for address 0. These tests
+  should prevent Enforcer hits if you try to read from non-existant memory.
+
+- You can debug code that is between a Forbid()/Permit() or Disable()/Enable()
+  pair, but obviously every single step or breakpoint will re-enable
+  multitasking and the interrupts. So be very careful when debugging such
+  code.
+
+- When you call a function from GDB ('print func()') the debugger uses an
+  extra 2048 bytes of stack space, besides the stack requirements of the
+  function call itself. So make sure the stack of the program you debug is
+  large enough. This can be a problem when you start nesting calls. For
+  example, if you put a breakpoint at the start of function F(), and then you
+  'print F()'. If you again 'print F()', you push another 2048 extra bytes on
+  the stack. After all, you hit the breakpoint in the middle of the first
+  call to F(), so the stack still contained the extra 2048 bytes.
+
+- I have added a new option -enforcer. When an enforcer hit occurs, you
+  will enter the debugger, one instruction after the instruction that
+  caused the hit.
+
+TODO:
+
+Implement 'remote' debugging. This would also allow gdb to debug programs
+that don't use ixemul.library. The mechanisms needed to do that are
+identical to remote debugging, except that the communication between gdb
+and the debugged process doesn't have to use the serial port, but can use
+FIFO: or Message ports instead.
+
+When you run out of memory, you get pyrotechnic fireworks. I guess there is
+a malloc in either gdb or bfd that doesn't check for a NULL return.
+
+GDB doesn't correctly recognize where the program ends.

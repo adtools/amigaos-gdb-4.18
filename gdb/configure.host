@@ -86,6 +86,7 @@ m68*-apollo*-sysv*)	gdb_host=apollo68v ;;
 m68*-apollo*-bsd*)	gdb_host=apollo68b ;;
 m68*-att-*)		gdb_host=3b1 ;;
 m68*-bull*-sysv*)	gdb_host=dpx2 ;;
+m68*-*-amigaos*)	gdb_host=amigaos ;;
 m68*-hp-bsd*)		gdb_host=hp300bsd ;;
 m68*-hp-hpux*)		gdb_host=hp300hpux ;;
 m68*-isi-*)		gdb_host=isi ;;

@@ -428,7 +428,8 @@ static boolean generic_add_output_symbol
 static boolean default_fill_link_order
   PARAMS ((bfd *, struct bfd_link_info *, asection *,
 	   struct bfd_link_order *));
-static boolean default_indirect_link_order
+/*Amiga hack - used in amigaoslink.c so must be global */
+/*static*/ boolean default_indirect_link_order
   PARAMS ((bfd *, struct bfd_link_info *, asection *,
 	   struct bfd_link_order *, boolean));
 
@@ -2633,7 +2634,7 @@ default_fill_link_order (abfd, info, sec, link_order)
 
 /* Default routine to handle a bfd_indirect_link_order.  */
 
-static boolean
+/*static*/ boolean
 default_indirect_link_order (output_bfd, info, output_section, link_order,
 			     generic_linker)
      bfd *output_bfd;

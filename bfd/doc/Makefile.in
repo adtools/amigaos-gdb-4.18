@@ -116,7 +116,7 @@ wordsize = @wordsize@
 
 AUTOMAKE_OPTIONS = cygnus
 
-DOCFILES = aoutx.texi  archive.texi archures.texi 	bfdt.texi  cache.texi coffcode.texi 	core.texi elf.texi elfcode.texi  format.texi  libbfd.texi  	opncls.texi  reloc.texi  section.texi  	syms.texi  targets.texi init.texi hash.texi linker.texi
+DOCFILES = aoutx.texi  archive.texi archures.texi 	bfdt.texi  cache.texi coffcode.texi 	core.texi elf.texi elfcode.texi  format.texi  libbfd.texi  	opncls.texi  reloc.texi  section.texi  	amiga.texi amigalink.texi 	syms.texi  targets.texi init.texi hash.texi linker.texi
 
 
 PROTOS = archive.p archures.p bfd.p 	 core.p format.p 	libbfd.p opncls.p reloc.p 	section.p syms.p targets.p  	format.p  core.p init.p
@@ -127,7 +127,7 @@ IPROTOS = cache.ip libbfd.ip reloc.ip init.ip archures.ip coffcode.ip
 # SRCDOC, SRCPROT, SRCIPROT only used to sidestep Sun Make bug in interaction 
 # between VPATH and suffix rules.  If you use GNU Make, perhaps other Makes,
 # you don't need these three:
-SRCDOC = $(srcdir)/../aoutx.h  $(srcdir)/../archive.c 	$(srcdir)/../archures.c $(srcdir)/../bfd.c 	$(srcdir)/../cache.c $(srcdir)/../coffcode.h 	$(srcdir)/../corefile.c $(srcdir)/../elf.c 	$(srcdir)/../elfcode.h  $(srcdir)/../format.c 	$(srcdir)/../libbfd.c $(srcdir)/../opncls.c 	$(srcdir)/../reloc.c  $(srcdir)/../section.c 	$(srcdir)/../syms.c  $(srcdir)/../targets.c 	$(srcdir)/../hash.c $(srcdir)/../linker.c
+SRCDOC = $(srcdir)/../aoutx.h  $(srcdir)/../archive.c 	$(srcdir)/../archures.c $(srcdir)/../bfd.c 	$(srcdir)/../cache.c $(srcdir)/../coffcode.h 	$(srcdir)/../corefile.c $(srcdir)/../elf.c 	$(srcdir)/../elfcode.h  $(srcdir)/../format.c 	$(srcdir)/../amigaos.c $(srcdir)/../amigaoslink.c 	$(srcdir)/../libbfd.c $(srcdir)/../opncls.c 	$(srcdir)/../reloc.c  $(srcdir)/../section.c 	$(srcdir)/../syms.c  $(srcdir)/../targets.c 	$(srcdir)/../hash.c $(srcdir)/../linker.c
 
 
 SRCPROT = $(srcdir)/../archive.c $(srcdir)/../archures.c 	$(srcdir)/../bfd.c $(srcdir)/../coffcode.h $(srcdir)/../corefile.c 	$(srcdir)/../format.c $(srcdir)/../libbfd.c 	$(srcdir)/../opncls.c $(srcdir)/../reloc.c 	$(srcdir)/../section.c $(srcdir)/../syms.c 	$(srcdir)/../targets.c $(srcdir)/../init.c
@@ -397,6 +397,18 @@ bfd.info bfd.dvi: $(DOCFILES) bfdsumm.texi bfd.texinfo
 # files have changed, then this Makefile will build chew, and will
 # build all of the stamp files, but will not actually have to rebuild
 # bfd.info.
+
+s-amiga: $(MKDOC) $(srcdir)/../amigaos.c $(srcdir)/doc.str
+	./$(MKDOC) -f $(srcdir)/doc.str <$(srcdir)/../amigaos.c >amiga.tmp
+	$(srcdir)/../../move-if-change amiga.tmp amiga.texi
+	touch s-amiga
+amiga.texi: s-amiga
+
+s-amigalink: $(MKDOC) $(srcdir)/../amigaoslink.c $(srcdir)/doc.str
+	./$(MKDOC) -f $(srcdir)/doc.str <$(srcdir)/../amigaoslink.c >amigalink.tmp
+	$(srcdir)/../../move-if-change amigalink.tmp amigalink.texi
+	touch s-amigalink
+amigalink.texi: s-amigalink
 
 s-aoutx: $(MKDOC) $(srcdir)/../aoutx.h $(srcdir)/doc.str
 	./$(MKDOC) -f $(srcdir)/doc.str <$(srcdir)/../aoutx.h >aoutx.tmp

@@ -4137,6 +4137,7 @@ new_symbol (die, type, objfile)
 	    }
 	  break;
 	case DW_TAG_variable:
+	case DW_TAG_constant:
 	  /* Compilation with minimal debug info may result in variables
 	     with missing type entries. Change the misleading `void' type
 	     to something sensible.  */

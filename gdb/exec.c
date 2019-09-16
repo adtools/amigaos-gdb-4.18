@@ -396,6 +396,13 @@ bfdsec_to_vmap(abfd, sect, arg3)
 
   vp = vmap_bfd->pvmap;
 
+#ifdef __amigaos__
+  if (STREQ (bfd_section_name (abfd, sect), ".bss"))
+    {
+      vp->bstart = 0;
+      vp->bend = vp->bstart + bfd_section_size (abfd, sect);
+    }
+#endif
   if ((bfd_get_section_flags (abfd, sect) & SEC_LOAD) == 0)
     return;
 
@@ -629,6 +636,18 @@ exec_files_info (t)
       struct vmap *vp;
 
       printf_unfiltered ("\tMapping info for file `%s'.\n", vmap->name);
+#ifdef __amigaos__
+      printf_unfiltered ("  %8.8s   %8.8s   %8.8s   %8.8s   %8.8s   %8.8s %8.8s %s\n",
+		       "tstart", "tend", "dstart", "dend", "bstart", "bend", "section",
+		       "file(member)");
+
+    for (vp = vmap; vp; vp = vp->nxt)
+      printf_unfiltered ("0x%8.8x 0x%8.8x 0x%8.8x 0x%8.8x 0x%8.8x 0x%8.8x %s%s%s%s\n",
+			 vp->tstart, vp->tend, vp->dstart, vp->dend, vp->bstart, vp->bend, vp->name,
+			 *vp->member ? "(" : "", vp->member,
+			 *vp->member ? ")" : "");
+    }
+#else
       printf_unfiltered ("\t  %8.8s   %8.8s   %8.8s   %8.8s %8.8s %s\n",
 		       "tstart", "tend", "dstart", "dend", "section",
 		       "file(member)");
@@ -639,6 +658,7 @@ exec_files_info (t)
 			 *vp->member ? "(" : "", vp->member,
 			 *vp->member ? ")" : "");
     }
+#endif
 }
 
 static void

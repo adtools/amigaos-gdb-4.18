@@ -150,6 +150,7 @@ DESCRIPTION
 .  bfd_target_ihex_flavour,
 .  bfd_target_som_flavour,
 .  bfd_target_os9k_flavour,
+.  bfd_target_amiga_flavour,
 .  bfd_target_versados_flavour,
 .  bfd_target_msdos_flavour,
 .  bfd_target_ovax_flavour,
@@ -474,6 +475,8 @@ in this structure.
    we can't intermix extern's and initializers.  */
 extern const bfd_target a29kcoff_big_vec;
 extern const bfd_target a_out_adobe_vec;
+extern const bfd_target amiga_vec;
+extern const bfd_target aout_amiga_vec;
 extern const bfd_target aout_arm_big_vec;
 extern const bfd_target aout_arm_little_vec;
 extern const bfd_target aout_mips_big_vec;
@@ -642,6 +645,8 @@ const bfd_target * const bfd_target_vector[] = {
 	   it wasn't omitted by mistake.  */
 	&a29kcoff_big_vec,
 	&a_out_adobe_vec,
+	&amiga_vec,
+	&aout_amiga_vec,
 #if 0				/* No one seems to use this.  */
 	&aout_mips_big_vec,
 #endif

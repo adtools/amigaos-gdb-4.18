@@ -233,6 +233,9 @@ case "${host}" in
   *-*-sysv*)
     host_makefile_frag="${host_makefile_frag} config/mh-sysv"
     ;;
+  m68k-*-amigaos)
+    host_makefile_frag="${host_makefile_frag} config/mh-amigaos"
+    ;;
 esac
 fi
 

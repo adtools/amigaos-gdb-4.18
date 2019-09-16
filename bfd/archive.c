@@ -1712,8 +1712,11 @@ _bfd_write_archive_contents (arch)
 	{
 	  if (bfd_update_armap_timestamp (arch))
 	    break;
+#if 0	/* Amiga hack - this seems to always happen.  Need to investigate
+           why and fix it.  For now, stop the gripes... -fnf */
 	  (*_bfd_error_handler)
 	    (_("Warning: writing archive was slow: rewriting timestamp\n"));
+#endif
 	}
       while (++tries < 6);
     }

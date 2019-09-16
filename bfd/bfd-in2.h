@@ -2463,6 +2463,7 @@ struct _bfd
       struct lynx_core_struct *lynx_core_data;
       struct osf_core_struct *osf_core_data;
       struct cisco_core_struct *cisco_core_data;
+      struct amiga_data_struct *amiga_data;
       struct versados_data_struct *versados_data;
       struct netbsd_core_struct *netbsd_core_data;
       PTR any;
@@ -2695,6 +2696,7 @@ enum bfd_flavour {
   bfd_target_ihex_flavour,
   bfd_target_som_flavour,
   bfd_target_os9k_flavour,
+  bfd_target_amiga_flavour,
   bfd_target_versados_flavour,
   bfd_target_msdos_flavour,
   bfd_target_ovax_flavour,

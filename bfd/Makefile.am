@@ -104,12 +104,15 @@ ALL_MACHINES_CFILES = \
 # target_vector in targets.c if configured with --enable-targets=all.
 BFD32_BACKENDS = \
 	aout-adobe.lo \
+	aout-amiga.o\
 	aout-arm.lo \
 	aout-ns32k.lo \
 	aout-sparcle.lo \
 	aout-tic30.lo \
 	aout0.lo \
 	aout32.lo \
+	amigaos.lo \
+	amigaoslink.lo \
 	bout.lo \
 	cf-i386lynx.lo \
 	cf-m68klynx.lo \
@@ -217,7 +220,10 @@ BFD32_BACKENDS = \
 	xcofflink.lo
 
 BFD32_BACKENDS_CFILES = \
+	amigaos.c \
+	amigaoslink.c \
 	aout-adobe.c \
+	aout-amiga.c \
 	aout-arm.c \
 	aout-ns32k.c \
 	aout-sparcle.c \

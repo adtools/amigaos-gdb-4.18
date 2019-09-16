@@ -536,6 +536,9 @@ dbx_symfile_read (objfile, section_offsets, mainline)
   bfd *sym_bfd;
   int val;
   struct cleanup *back_to;
+#ifdef __amigaos__
+  struct symbol *mainsym;
+#endif
 
   val = strlen (objfile->name);
 
@@ -592,6 +595,17 @@ dbx_symfile_read (objfile, section_offsets, mainline)
      minimal symbols for this objfile. */
 
   install_minimal_symbols (objfile);
+
+#ifdef __amigaos__
+  mainsym = lookup_symbol ("main", NULL, VAR_NAMESPACE, NULL, NULL);
+
+  if (mainsym
+      && SYMBOL_CLASS(mainsym) == LOC_BLOCK)
+    {
+      objfile->ei.main_func_lowpc = BLOCK_START (SYMBOL_BLOCK_VALUE (mainsym));
+      objfile->ei.main_func_highpc = BLOCK_END (SYMBOL_BLOCK_VALUE (mainsym));
+    }
+#endif
 
   do_cleanups (back_to);
 }
@@ -2717,6 +2731,16 @@ stabsect_build_psymtabs (objfile, section_offsets, mainline, stab_name,
 
   processing_acc_compilation = 1;
   dbx_symfile_read (objfile, section_offsets, 0);
+}
+
+/* Called from amigaread.c  */
+void
+amiga_symfile_read (objfile, section_offsets, mainline)
+     struct objfile *objfile;
+     struct section_offsets *section_offsets;
+     int mainline;
+{
+  dbx_symfile_read (objfile, section_offsets, mainline);
 }
 
 static struct sym_fns aout_sym_fns =

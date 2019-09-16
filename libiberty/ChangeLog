@@ -1,3 +1,7 @@
+1999-04-19  Daniel Berlin  <danielb@university.microsoft.com>
+
+	* cplus-dem.c (mop_up): typevector size not being reset to 0 when typevector cleared.
+
 1999-04-01  Jim Blandy  <jimb@zwingli.cygnus.com>
 
 	* cplus-dem.c: Attempt to handle overflows in counts with some

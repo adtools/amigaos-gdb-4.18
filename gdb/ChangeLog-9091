@@ -1352,7 +1352,7 @@ Tue Oct 15 08:45:12 1991  John Gilmore  (gnu at cygnus.com)
 	* tm-68k.h (FPI_REGNUM):  Add.
 	* infrun.c (child_create_inferior):  flush stdout and stderr
 	before forking.
-	* configure.in:  Handle amigados, amix hosts and targets.
+	* configure.in:  Handle amigaos, amix hosts and targets.
 	* inflow.c:  Handle TIOCGLTC_BROKEN for Amiga.
 
 	From Andreas Schwab:

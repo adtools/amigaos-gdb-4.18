@@ -354,7 +354,7 @@ TARGET_FLAGS_TO_PASS = \
 # Links made at configuration time should not be specified here, since
 # SFILES is used in building the distribution archive.
 
-SFILES = ax-general.c ax-gdb.c bcache.c blockframe.c breakpoint.c \
+SFILES = amigaread.c ax-general.c ax-gdb.c bcache.c blockframe.c breakpoint.c \
 	buildsym.c c-exp.y c-lang.c c-typeprint.c c-valprint.c \
 	ch-exp.c ch-lang.c ch-typeprint.c ch-valprint.c coffread.c \
 	command.c complaints.c corefile.c cp-valprint.c dbxread.c \
@@ -914,7 +914,7 @@ unexport CHILLFLAGS CHILL_LIB CHILL_FOR_TARGET :
 ALLDEPFILES = 29k-share/udi/udip2soc.c 29k-share/udi/udr.c \
 	29k-share/udi/udi2go32.c \
 	a29k-tdep.c a68v-nat.c alpha-nat.c alpha-tdep.c \
-	altos-xdep.c arm-convert.s \
+	altos-xdep.c amigaread.c arm-convert.s \
 	arm-tdep.c arm-xdep.c coff-solib.c \
 	convex-tdep.c convex-xdep.c \
 	core-sol2.c core-regset.c core-aout.c corelow.c \
@@ -970,6 +970,9 @@ alpha-tdep.o: alpha-tdep.c $(defs_h) $(gdbcmd_h) $(gdbcore_h) \
 	$(inferior_h) $(symtab_h) $(dis-asm.h) gdb_string.h
 
 altos-xdep.o: altos-xdep.c $(defs_h) $(gdbcore_h) $(inferior_h)
+
+amigaread.o: amigaread.c $(bfd_h) buildsym.h complaints.h $(defs_h) \
+	gdb-stabs.h objfiles.h symfile.h $(symtab_h)
 
 annotate.o: annotate.c $(defs_h) annotate.h $(value_h) target.h $(gdbtypes_h)
 

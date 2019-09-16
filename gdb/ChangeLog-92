@@ -2563,7 +2563,7 @@ Fri Aug 28 13:13:33 1992  John Gilmore  (gnu@cygnus.com)
 Thu Aug 27 20:04:56 1992  John Gilmore  (gnu@cygnus.com)
 
 	* configure.in (target configurations):  Reformat into table.
-	Remove unsupp. Amigados host and target.  Ditto Mach 386 target.
+	Remove unsupp. AmigaOS host and target.  Ditto Mach 386 target.
 
 	* tm-altosgas.h, tm-i386v-g.h:  Remove ancient coff encap configs.
 	* config/{altosgas.mt, i386v-g.mt, i386v32-g.mt}:  Ditto.

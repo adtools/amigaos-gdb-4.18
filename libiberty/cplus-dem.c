@@ -880,6 +880,8 @@ mop_up (work, declp, success)
     {
       free ((char *) work -> typevec);
       work -> typevec = NULL;
+      /*DKH --- Size not being reset to 0... */
+      work -> typevec_size = 0;
     }
   if (work->tmpl_argvec)
     {

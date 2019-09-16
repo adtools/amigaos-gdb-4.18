@@ -6,6 +6,7 @@ DOCFILES = aoutx.texi  archive.texi archures.texi \
 	bfdt.texi  cache.texi coffcode.texi \
 	core.texi elf.texi elfcode.texi  format.texi  libbfd.texi  \
 	opncls.texi  reloc.texi  section.texi  \
+	amiga.texi amigalink.texi \
 	syms.texi  targets.texi init.texi hash.texi linker.texi
 
 PROTOS = archive.p archures.p bfd.p \
@@ -24,6 +25,7 @@ SRCDOC = $(srcdir)/../aoutx.h  $(srcdir)/../archive.c \
 	$(srcdir)/../cache.c $(srcdir)/../coffcode.h \
 	$(srcdir)/../corefile.c $(srcdir)/../elf.c \
 	$(srcdir)/../elfcode.h  $(srcdir)/../format.c \
+	$(srcdir)/../amigaos.c $(srcdir)/../amigaoslink.c \
 	$(srcdir)/../libbfd.c $(srcdir)/../opncls.c \
 	$(srcdir)/../reloc.c  $(srcdir)/../section.c \
 	$(srcdir)/../syms.c  $(srcdir)/../targets.c \
@@ -66,6 +68,18 @@ bfd.info bfd.dvi: $(DOCFILES) bfdsumm.texi bfd.texinfo
 # files have changed, then this Makefile will build chew, and will
 # build all of the stamp files, but will not actually have to rebuild
 # bfd.info.
+
+s-amiga: $(MKDOC) $(srcdir)/../amigaos.c $(srcdir)/doc.str
+	./$(MKDOC) -f $(srcdir)/doc.str <$(srcdir)/../amigaos.c >amiga.tmp
+	$(srcdir)/../../move-if-change amiga.tmp amiga.texi
+	touch s-amiga
+amiga.texi: s-amiga
+
+s-amigalink: $(MKDOC) $(srcdir)/../amigaoslink.c $(srcdir)/doc.str
+	./$(MKDOC) -f $(srcdir)/doc.str <$(srcdir)/../amigaoslink.c >amigalink.tmp
+	$(srcdir)/../../move-if-change amigalink.tmp amigalink.texi
+	touch s-amigalink
+amigalink.texi: s-amigalink
 
 s-aoutx: $(MKDOC) $(srcdir)/../aoutx.h $(srcdir)/doc.str
 	./$(MKDOC) -f $(srcdir)/doc.str <$(srcdir)/../aoutx.h >aoutx.tmp

@@ -134,7 +134,8 @@ DESCRIPTION
 static boolean aout_get_external_symbols PARAMS ((bfd *));
 static boolean translate_from_native_sym_flags
   PARAMS ((bfd *, aout_symbol_type *));
-static boolean translate_to_native_sym_flags
+/*Amiga hack - used in amigaos.c, must be global */
+/*static*/ boolean translate_to_native_sym_flags
   PARAMS ((bfd *, asymbol *, struct external_nlist *));
 static void adjust_o_magic PARAMS ((bfd *, struct internal_exec *));
 static void adjust_z_magic PARAMS ((bfd *, struct internal_exec *));
@@ -1596,7 +1597,7 @@ translate_from_native_sym_flags (abfd, cache_ptr)
 
 /* Set the fields of SYM_POINTER according to CACHE_PTR.  */
 
-static boolean
+/*static*/ boolean
 translate_to_native_sym_flags (abfd, cache_ptr, sym_pointer)
      bfd *abfd;
      asymbol *cache_ptr;
@@ -1997,10 +1998,27 @@ NAME(aout,swap_std_reloc_out) (abfd, g, natptr)
 
   r_length = g->howto->size ;	/* Size as a power of two */
   r_pcrel  = (int) g->howto->pc_relative; /* Relative to PC? */
+
+#ifdef __amigaos__
+  /* Changed for cooperation with AMIGA backend */
+  /* This only applies, if aout flavour    191194 ST*/
   /* XXX This relies on relocs coming from a.out files.  */
+  /* FIXME! "#ifdef __amigaos__" is the wrong way to select this code. */
+  if (bfd_asymbol_bfd(sym)->xvec->flavour==bfd_target_aout_flavour)
+    {
+      r_baserel = (g->howto->type & 8) != 0;
+      r_jmptable = (g->howto->type & 16) != 0;
+      r_relative = (g->howto->type & 32) != 0;
+    }
+  else
+    {
+      r_baserel=r_jmptable=r_relative=0;
+    }
+#else
   r_baserel = (g->howto->type & 8) != 0;
   r_jmptable = (g->howto->type & 16) != 0;
   r_relative = (g->howto->type & 32) != 0;
+#endif
 
 #if 0
   /* For a standard reloc, the addend is in the object file.  */
@@ -2512,6 +2530,11 @@ NAME(aout,get_reloc_upper_bound) (abfd, asect)
 
   if (asect == obj_bsssec (abfd))
     return 0;
+
+#ifdef __amigaos__	/* FIXME */
+  fprintf(stderr,"Hmmm, sec=%s, %lx, .text=%lx, .data=%lx, .bss=%lx\n",
+	  asect->name,asect,obj_textsec(abfd),obj_datasec(abfd),obj_bsssec(abfd));
+#endif
 
   bfd_set_error (bfd_error_invalid_operation);
   return -1;

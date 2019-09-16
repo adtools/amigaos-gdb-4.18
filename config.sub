@@ -317,10 +317,10 @@ case $basic_machine in
 		os=-sysv
 		;;
 	amiga | amiga-*)
-		basic_machine=m68k-cbm
+		basic_machine=m68k-unknown
 		;;
 	amigaos | amigados)
-		basic_machine=m68k-cbm
+		basic_machine=m68k-unknown
 		os=-amigaos
 		;;
 	amigaunix | amix)

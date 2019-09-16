@@ -134,6 +134,7 @@ m68000-*-sunos4*)	gdb_target=sun2os4 ;;
 
 m68*-apollo*-bsd*)	gdb_target=apollo68b ;;
 m68*-bull-sysv*)	gdb_target=dpx2 ;;
+m68*-*-amigaos*)	gdb_target=amigaos ;;
 m68*-hp-bsd*)		gdb_target=hp300bsd ;;
 m68*-hp-hpux*)		gdb_target=hp300hpux ;;
 m68*-altos-*)		gdb_target=altos ;;

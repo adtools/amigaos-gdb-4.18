@@ -27,16 +27,20 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #define FRAME_CHAIN_VALID_ALTERNATE
 
+#ifdef __amigaos__
 #define FRAME_FIND_SAVED_REGS(fi,fsr) amigaos_find_saved_regs ((fi), &(fsr))
+#endif
 
 /* Advance PC across any function entry prologue instructions
    to reach some "real" code.  */
 
+#ifdef __amigaos__
 #define SKIP_PROLOGUE(ip)   {(ip) = amigaos_skip_prologue(ip);}
 extern CORE_ADDR amigaos_skip_prologue PARAMS ((CORE_ADDR ip));
 
 #define SKIP_TRAMPOLINE_CODE(pc) (amigaos_skip_trampoline_code(pc))
 extern CORE_ADDR amigaos_skip_trampoline_code(CORE_ADDR pc);
+#endif
 
 /* When creating a dummy frame, GDB should leave this many bytes between
    the SP and the start of the frame. The space in between contains the
@@ -50,13 +54,17 @@ extern CORE_ADDR amigaos_skip_trampoline_code(CORE_ADDR pc);
 #define PC_IN_CALL_DUMMY(pc, sp, frame_address) amigaos_pc_in_call_dummy(pc, sp, frame_address)
 extern int amigaos_pc_in_call_dummy(CORE_ADDR pc, CORE_ADDR sp, CORE_ADDR frame_address);
 
+#if __amigaos__
 #undef PUSH_DUMMY_FRAME
 #define PUSH_DUMMY_FRAME	{ amigaos_push_dummy_frame (); }
 extern void amigaos_push_dummy_frame PARAMS ((void));
+#endif
 
+#if __amigaos__
 #undef POP_FRAME
 #define POP_FRAME		{ amigaos_pop_frame (); }
 extern void amigaos_pop_frame PARAMS ((void));
+#endif
 
 /* replace moveml d0-a5,sp@- by moveml d0-a4/a6,sp@- */
 #undef CALL_DUMMY
@@ -125,13 +133,16 @@ extern void amigaos_pop_frame PARAMS ((void));
 #undef FP_REGNUM
 #define FP_REGNUM 13
 
+#ifdef __amigaos__
 #define IN_SIGTRAMP(pc, name) amigaos_in_sigtramp(pc)
 int amigaos_in_sigtramp(CORE_ADDR pc);
+#endif
 
 #undef FRAME_SAVED_PC
 #define FRAME_SAVED_PC(FRAME) \
     (read_memory_integer ((FRAME)->frame + 4, 4))
 
+#ifdef __amigaos__
 extern int amigaos_enforcer;
 
 #define	ADDITIONAL_OPTIONS \
@@ -144,3 +155,4 @@ extern int amigaos_enforcer;
 
 extern void amigaos_install_enforcer_handler(void);
 #define BEFORE_MAIN_LOOP_HOOK amigaos_install_enforcer_handler()
+#endif
